@@ -1,0 +1,28 @@
+<!ELEMENT clientes (pedidos)*> <!-- define un elemento clientes que puede contener cero o más elementos pedidos -->
+<!ELEMENT pedidos (trimestre)*> <!-- define un elemento pedidos que puede contener cero o más elementos trimestre -->
+<!ATTLIST pedidos
+        año CDATA #REQUIRED> <!-- define un atributo año del elemento pedidos como requerido y de tipo CDATA -->
+<!ELEMENT trimestre (pedido)*> <!--  define un elemento trimestre que puede contener cero o más elementos pedido -->
+<!ATTLIST trimestre
+        trimestre CDATA #REQUIRED> <!-- define un atributo trimestre del elemento trimestre como requerido y de tipo CDATA -->
+<!ELEMENT pedido (nombre|apellidos|telefono|direccion|correo_electronico|fecha_inclusion|numero_pedido|fecha_compra|fecha_entrega|total_factura|productos)*> <!-- define un elemento pedido que puede contener cualquiera de los elementos especificados en el paréntesis, en cualquier orden y cantidad, incluyendo cero. -->
+<!ELEMENT nombre (#PCDATA)> <!-- define un elemento nombre que solo puede contener texto (PCDATA) -->
+<!ELEMENT apellidos (#PCDATA)>
+<!ELEMENT telefono (#PCDATA)>
+<!ELEMENT direccion (calle|ciudad|codigo_postal|provincia)*> <!-- define un elemento direccion que puede contener cualquiera de los elementos especificados en el paréntesis, en cualquier orden y cantidad, incluyendo cero -->
+<!ELEMENT calle (#PCDATA)>
+<!ELEMENT ciudad (#PCDATA)>
+<!ELEMENT codigo_postal (#PCDATA)>
+<!ELEMENT provincia (#PCDATA)>
+<!ELEMENT correo_electronico (#PCDATA)>
+<!ELEMENT fecha_inclusion (#PCDATA)>
+<!ELEMENT numero_pedido (#PCDATA)>
+<!ELEMENT fecha_compra (#PCDATA)>
+<!ELEMENT fecha_entrega (#PCDATA)>
+<!ELEMENT total_factura (#PCDATA)>
+<!ELEMENT productos (producto)*>
+<!ELEMENT producto (nombre_producto|referencia|unidades|precio)*>
+<!ELEMENT nombre_producto (#PCDATA)>
+<!ELEMENT referencia (#PCDATA)>
+<!ELEMENT unidades (#PCDATA)>
+<!ELEMENT precio (#PCDATA)>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <link rel="stylesheet" type="text/css" href="css/styles.css">
+      <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+      <title>Hito individual</title>
+  </head>
+  <body>
+      <div class="container-fluid">
+          <div class="row">
+              <header id="header" class="col-12 p-3 text-center">
+                  <h1 class="text-uppercase fw-bold">Pedidos del primer trimestre</h1>
+                  <nav id="menu" class="col-12 p-2">
+                      <ul class="nav justify-content-center">
+                          <li class="nav-item">
+                              <a class="nav-link" href="info-pedidos.html">Información de pedidos</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="info-clientes.html">Información de clientes</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="factura.html">Factura</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="productos1T.html">Primer trimestre</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="productos4T.html">Último trimestre</a>
+                          </li>
+                      </ul>
+                  </nav>
+              </header>
+
+              <section>
+
+              </section>
+              <script>
+                  if (window.XMLHttpRequest) {
+                    xmlhttp = new XMLHttpRequest();
+                  }
+                  else {
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                  }
+                  xmlhttp.open("GET", "pedidos.xml", false);
+                  xmlhttp.send();
+                  xmlDoc = xmlhttp.responseXML;
+                  const section = document.querySelector("section"); // Selecciono el elemento section
+                  document.write("<table class=' table table-sm table-striped table-hover'>");
+                  document.write("<thead>");
+                  document.write("<tr>");
+                  document.write("<th scope='col'>Número pedido</th>");
+                  document.write("<th scope='col'>Nombre</th>");
+                  document.write("<th scope='col'>Apellidos</th>");
+                  document.write("<th scope='col'>Teléfono</th>");
+                  document.write("<th scope='col'>Calle</th>");
+                  document.write("<th scope='col'>Ciudad</th>");
+                  document.write("<th scope='col'>CP</th>");
+                  document.write("<th scope='col'>Provincia</th>");
+                  document.write("<th scope='col'>Correo electrónico</th>");
+                  document.write("<th scope='col'>Fecha inclusión</th>");
+                  document.write("<th scope='col'>Fecha compra</th>");
+                  document.write("<th scope='col'>Fecha entrega</th>");
+                  document.write("<th scope='col'>Total factura</th>");
+                  document.write("<th scope='col'>Producto</th>");
+                  document.write("<th scope='col'>Referencia</th>");
+                  document.write("<th scope='col'>Unidades</th>");
+                  document.write("<th scope='col'>Precio</th>");
+                  document.write("</tr>");
+                  document.write("</thead>");
+                  document.write("<tbody>");
+
+                  var year = xmlDoc.querySelector("clientes pedidos[año='2021']");
+                  var trimestre = year.querySelector("trimestre[trimestre='1']");
+                  var pedidos = trimestre.getElementsByTagName("pedido");
+
+                  for (let i = 0; i < pedidos.length; i++) {
+                    document.write("<tr>");
+                    document.write("<th scope='row'>" + pedidos[i].getElementsByTagName("numero_pedido")[0].childNodes[0].nodeValue + "</th>");
+                    document.write("<td>" + pedidos[i].getElementsByTagName("nombre")[0].childNodes[0].nodeValue + "</td>");
+                    document.write("<td>" + pedidos[i].getElementsByTagName("apellidos")[0].childNodes[0].nodeValue + "</td>");
+                    document.write("<td>" + pedidos[i].getElementsByTagName("telefono")[0].childNodes[0].nodeValue + "</td>");
+                    document.write("<td>" + pedidos[i].getElementsByTagName("calle")[0].childNodes[0].nodeValue + "</td>");
+                    document.write("<td>" + pedidos[i].getElementsByTagName("ciudad")[0].childNodes[0].nodeValue + "</td>");
+                    document.write("<td>" + pedidos[i].getElementsByTagName("codigo_postal")[0].childNodes[0].nodeValue + "</td>");
+                    document.write("<td>" + pedidos[i].getElementsByTagName("provincia")[0].childNodes[0].nodeValue + "</td>");
+                    document.write("<td>" + pedidos[i].getElementsByTagName("correo_electronico")[0].childNodes[0].nodeValue + "</td>");
+                    document.write("<td>" + pedidos[i].getElementsByTagName("fecha_inclusion")[0].childNodes[0].nodeValue + "</td>");
+                    document.write("<td>" + pedidos[i].getElementsByTagName("fecha_compra")[0].childNodes[0].nodeValue + "</td>");
+                    document.write("<td>" + pedidos[i].getElementsByTagName("fecha_entrega")[0].childNodes[0].nodeValue + "</td>");
+                    document.write("<td>" + pedidos[i].getElementsByTagName("total_factura")[0].childNodes[0].nodeValue + "</td>");
+                    document.write("<td>" + pedidos[i].getElementsByTagName("nombre_producto")[0].childNodes[0].nodeValue + "</td>");
+                    document.write("<td>" + pedidos[i].getElementsByTagName("referencia")[0].childNodes[0].nodeValue + "</td>");
+                    document.write("<td>" + pedidos[i].getElementsByTagName("unidades")[0].childNodes[0].nodeValue + "</td>");
+                    document.write("<td>" + pedidos[i].getElementsByTagName("precio")[0].childNodes[0].nodeValue + "</td>");
+                    document.write("</tr>");
+                  }
+              </script>
+          </div>
+      </div>
+    <!--Cargar el archivo jquery-->
+    <script type="text/javascript" src="jquery/jquery-3.6.3.min.js"></script>
+    <!--Cargar el archivo javascript de bootstrap-->
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>

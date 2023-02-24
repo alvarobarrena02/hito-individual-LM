@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+        <title>Hito individual</title>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <header id="header" class="col-12 p-3 text-center">
+                    <h1 class="text-uppercase fw-bold">Factura de compra</h1>
+                    <nav id="menu" class="col-12 p-2">
+                        <ul class="nav justify-content-center">
+                            <li class="nav-item">
+                                <a class="nav-link" href="info-pedidos.html">Información de pedidos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="info-clientes.html">Información de clientes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="factura.html">Factura</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="productos1T.html">Primer trimestre</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="productos4T.html">Último trimestre</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </header>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="col-12">
+                    <h2 class="text-capitalize fw-bold">Información de pedidos</h2>
+                </div>
+            </div>
+            <form>
+                <fieldset>
+                    <label for="idNumber">Selecciona el número de pedido (del 1 al 80):</label>
+                    <input type="number" id="idNumber" name="idNumber">
+                    <button type="submit" id="submitBtn">Enviar</button>
+                </fieldset>
+            </form>
+            <div id="log" class="mt-3"></div>
+            <div class="table table-responsive mt-3">
+                <div class="container text-center">
+                    <div class="row justify-content-start">
+
+                        <div class="row justify-content-between">
+                            <div class="col-6 text-success-emphasis bg-success-subtle border border-success-subtle rounded-3 fw-bold">Número de pedido:</div>
+                            <div class="col-6 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3 text-start" id="numero_pedido"></div>
+                        </div>
+
+                        <div class="row justify-content-between">
+                            <div class="col-6 text-success-emphasis bg-success-subtle border border-success-subtle rounded-3 fw-bold">Nombre:</div>
+                            <div class="col-6 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3 text-start" id="nombre"></div>
+                        </div>
+
+                        <div class="row justify-content-between">
+                            <div class="col-6 text-success-emphasis bg-success-subtle border border-success-subtle rounded-3 fw-bold">Apellidos:</div>
+                            <div class="col-6 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3 text-start" id="apellidos"></div>
+                        </div>
+
+                        <div class="row justify-content-between">
+                            <div class="col-6 text-success-emphasis bg-success-subtle border border-success-subtle rounded-3 fw-bold">Teléfono:</div>
+                            <div class="col-6 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3 text-start" id="telefono"></div>
+                        </div>
+
+                        <div class="row justify-content-between">
+                            <div class="col-6 text-success-emphasis bg-success-subtle border border-success-subtle rounded-3 fw-bold">Correo electrónico:</div>
+                            <div class="col-6 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3 text-start" id="correo_electronico"></div>
+                        </div>
+
+                        <div class="row justify-content-between">
+                            <div class="col-6 text-success-emphasis bg-success-subtle border border-success-subtle rounded-3 fw-bold">Producto:</div>
+                            <div class="col-6 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3 text-start" id="nombre_producto"></div>
+                        </div>
+
+                        <div class="row justify-content-between">
+                            <div class="col-6 text-success-emphasis bg-success-subtle border border-success-subtle rounded-3 fw-bold">Referencia:</div>
+                            <div class="col-6 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3 text-start" id="referencia"></div>
+                        </div>
+
+                        <div class="row justify-content-evenly">
+                            <div class="col-6 text-success-emphasis bg-success-subtle border border-success-subtle rounded-3 fw-bold">Precio:</div>
+                            <div class="col-6 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3 text-start" id="precio"></div>
+                        </div>
+
+                        <div class="row justify-content-between">
+                            <div class="col-6 text-success-emphasis bg-success-subtle border border-success-subtle rounded-3 fw-bold">Unidades:</div>
+                            <div class="col-6 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3 text-start" id="unidades"></div>
+                        </div>
+
+                        <div class="row justify-content-between">
+                            <div class="col-6 text-success-emphasis text- bg-success-subtle border border-success-subtle rounded-3 fw-bold">Total factura:</div>
+                            <div class="col-6 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3 text-start" id="total_factura"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "pedidos.xml", true);
+
+            window.addEventListener("load", function() {
+                const xhr = new XMLHttpRequest();
+                xhr.open("GET", "pedidos.xml", true);
+
+                xhr.onreadystatechange = function() {
+                    if (this.readyState === 4 && this.status === 200) {
+                        const xmlDoc = this.responseXML;
+                        const numberSpan = document.querySelector("#idNumber").value;
+                        //alert(numberSpan);
+                        const Pedidos = xmlDoc.getElementsByTagName("pedido");
+                        numberSpan.innerHTML = Pedidos.length;
+                    }
+                };
+                xhr.send();
+            });
+
+            xhr.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                    const xmlDoc = this.responseXML;
+                    const form = document.querySelector("form");
+
+                    form.addEventListener("submit", function(event) {
+                        event.preventDefault();
+                        const idNumber = document.querySelector("#idNumber").value;
+                        const Pedidos = xmlDoc.getElementsByTagName("pedido");
+                        if (idNumber < 0 || idNumber > (Pedidos.length)) {
+                            document.querySelector("#numero_pedido").innerHTML = "";
+                            document.querySelector("#nombre").innerHTML = "";
+                            document.querySelector("#apellidos").innerHTML = "";
+                            document.querySelector("#telefono").innerHTML = "";
+                            document.querySelector("#correo_electronico").innerHTML = "";
+                            document.querySelector("#nombre_producto").innerHTML = "";
+                            document.querySelector("#referencia").innerHTML = "";
+                            document.querySelector("#precio").innerHTML = "";
+                            document.querySelector("#unidades").innerHTML = "";
+                            document.querySelector("#total_factura").innerHTML = "";
+                            let log = document.querySelector("#log");
+                            log.innerHTML = "No se encontró una factura con ese número";
+                            return;
+                        }
+                        const pedido = Pedidos[idNumber-1];
+                        const numero_pedido = pedido.getElementsByTagName("numero_pedido")[0].childNodes[0].nodeValue;
+                        const nombre = pedido.getElementsByTagName("nombre")[0].childNodes[0].nodeValue;
+                        const apellidos = pedido.getElementsByTagName("apellidos")[0].childNodes[0].nodeValue;
+                        const telefono = pedido.getElementsByTagName("telefono")[0].childNodes[0].nodeValue;
+                        const correo_electronico = pedido.getElementsByTagName("correo_electronico")[0].childNodes[0].nodeValue;
+                        const nombre_pproducto = pedido.getElementsByTagName("nombre_producto")[0].childNodes[0].nodeValue;
+                        const referencia = pedido.getElementsByTagName("referencia")[0].childNodes[0].nodeValue;
+                        const precio = pedido.getElementsByTagName("precio")[0].childNodes[0].nodeValue;
+                        const unidades = pedido.getElementsByTagName("unidades")[0].childNodes[0].nodeValue;
+                        const total_factura = pedido.getElementsByTagName("total_factura")[0].childNodes[0].nodeValue;
+
+                        document.querySelector("#numero_pedido").innerHTML = numero_pedido;
+                        document.querySelector("#nombre").innerHTML = nombre;
+                        document.querySelector("#apellidos").innerHTML = apellidos;
+                        document.querySelector("#telefono").innerHTML = telefono;
+                        document.querySelector("#correo_electronico").innerHTML = correo_electronico;
+                        document.querySelector("#nombre_producto").innerHTML = nombre_pproducto;
+                        document.querySelector("#referencia").innerHTML = referencia;
+                        document.querySelector("#precio").innerHTML = precio;
+                        document.querySelector("#unidades").innerHTML = unidades;
+                        document.querySelector("#total_factura").innerHTML = total_factura;
+
+                    });
+                }
+            };
+            xhr.send();
+        </script>
+        <!--Cargar el archivo jquery-->
+        <script type="text/javascript" src="jquery/jquery-3.6.3.min.js"></script>
+        <!--Cargar el archivo javascript de bootstrap-->
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    </body>
+</html>
